@@ -9,6 +9,10 @@ export default function handler(req, res) {
     const certPath = path.join('/tmp', 'cert.pem');
 
     // Option 1: Direct usage (if not Base64-encoded)
+    if (!process.env.PG_SSL_CERT) {
+        throw new Error("Environment variable PG_SSL_CERT is not defined.");
+    }
+
     const certContent = process.env.PG_SSL_CERT.replace(/\\n/g, '\n');
 
     // Option 2: Decode Base64 content
