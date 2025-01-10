@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "echo \"$PG_SSL_CERT\" > ./ca.pem",
 
-    "prebuild": "cp -R certs dist/certs",
+    "prebuild": "mkdir -p dist/certs && cp -R certs dist/certs",
 
 
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
