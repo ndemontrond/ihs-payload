@@ -59,15 +59,22 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
+
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
-      ssl: {
-        rejectUnauthorized: true,
-        ca: process.env.PG_SSL_CERT,
-      },
     },
   }),
+
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI || '',
+  //     ssl: {
+  //       rejectUnauthorized: true,
+  //       ca: process.env.PG_SSL_CERT,
+  //     },
+  //   },
+  // }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],

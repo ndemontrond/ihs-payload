@@ -1,0 +1,10 @@
+{
+    "function": {
+        "api/*": {
+            "includeFiles": "certs/**"
+        },
+        "srp/app/*": {
+            "includeFiles": "certs/**"
+        }
+    }
+}
