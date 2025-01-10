@@ -1,10 +1,7 @@
 {
-    "functions": {
-        "api/*": {
-            "includeFiles": "certs/**"
-        },
-        "srp/app/*": {
-            "includeFiles": "certs/**"
-        }
+  "functions": {
+    "*": {
+      "includeFiles": "certs/**"
     }
+  }
 }
