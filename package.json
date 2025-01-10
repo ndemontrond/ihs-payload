@@ -7,8 +7,7 @@
   "scripts": {
     "postinstall": "echo \"$PG_SSL_CERT\" > ./ca.pem",
 
-    "prebuild": "mkdir -p dist/certs && cp -R certs dist/certs",
-
+  "prebuild": "mkdir -p .next/certs && cp -R certs .next/certs",
 
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
