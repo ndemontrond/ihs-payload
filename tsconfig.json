@@ -21,6 +21,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "isolatedModules": true,
+    "types": ["node"], // Add this to include Node.js types
     "plugins": [
       {
         "name": "next"
