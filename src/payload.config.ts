@@ -92,12 +92,13 @@ export default buildConfig({
       ssl: {
         ca: cert,
         rejectUnauthorized: true,
-        checkServerIdentity: () => undefined, // Bypass hostname checks
-        // Use the extracted host
-        servername: host,
+        // Adding more SSL options
+        checkServerIdentity: () => undefined,
+        secureOptions: require('crypto').constants.SSL_OP_NO_TLSv1_2,
+        minVersion: 'TLSv1.2',
+        servername: 'pg-1c79c059-proton-31d6.l.aivencloud.com',
       },
     },
-    debug: true, // Enable PostgreSQL adapter debugging
   }),
 
   collections: [Pages, Posts, Media, Categories, Users],
