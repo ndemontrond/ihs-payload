@@ -9,10 +9,8 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracing: true,
-  experimental: { 
-    outputFileTracingIncludes: { 
-      '/': ['ca.pem'] // Include certificate at root 
-    }
+  outputFileTracingIncludes: {
+    '/': ['ca.pem'], // Include certificate at root
   },
   images: {
     remotePatterns: [
