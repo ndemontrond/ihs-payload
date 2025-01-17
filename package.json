@@ -6,9 +6,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "echo \"$PG_SSL_CERT\" > ./ca.pem",
-
-  "prebuild": "mkdir -p .next/certs && cp -R certs .next/certs",
-
+    "prebuild": "mkdir -p .next/certs && cp -R certs .next/certs",
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
@@ -23,6 +21,8 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "3.9.0",
+    "@payloadcms/db-vercel-postgres": "^3.17.1",
     "@payloadcms/live-preview-react": "3.9.0",
     "@payloadcms/next": "3.9.0",
     "@payloadcms/payload-cloud": "3.9.0",
@@ -53,8 +53,7 @@
     "react-hook-form": "7.45.4",
     "sharp": "0.32.6",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "@payloadcms/db-postgres": "3.9.0"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
