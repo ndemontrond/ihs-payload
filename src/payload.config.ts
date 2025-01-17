@@ -92,11 +92,9 @@ export default buildConfig({
       ssl: {
         ca: cert,
         rejectUnauthorized: true,
-        // Adding more SSL options
-        checkServerIdentity: () => undefined,
-        secureOptions: require('crypto').constants.SSL_OP_NO_TLSv1_2,
-        minVersion: 'TLSv1.2',
-        servername: 'pg-1c79c059-proton-31d6.l.aivencloud.com',
+        checkServerIdentity: () => undefined, // Bypass hostname checks
+        // Use the extracted host
+        servername: host,
       },
     },
   }),
