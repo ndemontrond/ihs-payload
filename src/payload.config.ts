@@ -123,7 +123,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
       ssl: {
         rejectUnauthorized: true,
-        ca, // Use embedded CA certificate
+        sslrootcert: ca, // Use embedded CA certificate
       },
     },
   }),
