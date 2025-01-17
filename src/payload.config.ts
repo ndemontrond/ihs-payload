@@ -96,7 +96,8 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
       ssl: {
         ca: cert,
-        rejectUnauthorized: true,
+        // rejectUnauthorized: true,
+        rejectUnauthorized: false,
         servername: host,
       },
     },
