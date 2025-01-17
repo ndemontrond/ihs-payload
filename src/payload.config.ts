@@ -125,7 +125,7 @@ export default buildConfig({
       ssl: {
         rejectUnauthorized: true,
         // sslrootcert: ca, // Use embedded CA certificate
-        ca: fs.readFileSync('../ca.pem').toString(),
+        ca: fs.readFileSync(certPath).toString(),
       },
     },
   }),
