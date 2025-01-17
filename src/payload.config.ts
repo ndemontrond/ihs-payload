@@ -40,6 +40,11 @@ const hostMatch = connectionString.match(/@([^:]+)/)
 const host = hostMatch ? hostMatch[1] : ''
 console.log('Connecting to host:', host)
 
+console.log('SSL Config:', {
+  ca: cert ? 'Loaded' : 'Not loaded',
+  servername: host,
+})
+
 export default buildConfig({
   admin: {
     components: {
@@ -92,8 +97,6 @@ export default buildConfig({
       ssl: {
         ca: cert,
         rejectUnauthorized: true,
-        checkServerIdentity: () => undefined, // Bypass hostname checks
-        // Use the extracted host
         servername: host,
       },
     },
