@@ -20,7 +20,22 @@ import { readFileSync } from 'fs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-const cert = readFileSync(path.join(process.cwd(), 'ca.pem')).toString()
+
+// Add debugging
+const certPath = path.join(process.cwd(), 'ca.pem')
+console.log('Attempting to read certificate from:', certPath)
+
+let cert
+try {
+  cert = readFileSync(certPath).toString()
+  console.log('Certificate loaded successfully')
+  console.log('Certificate length:', cert.length)
+  // Log first few characters to verify content (don't log entire cert for security)
+  console.log('Certificate starts with:', cert.substring(0, 50))
+} catch (error) {
+  console.error('Failed to read certificate:', error)
+  throw error
+}
 
 export default buildConfig({
   admin: {
@@ -74,6 +89,8 @@ export default buildConfig({
       ssl: {
         ca: cert,
         rejectUnauthorized: true,
+        checkServerIdentity: () => undefined,
+        servername: 'pg-1c79c059-proton-31d6.l.aivencloud.com', // Use your actual hostname
       },
     },
   }),
