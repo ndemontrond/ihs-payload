@@ -29,13 +29,16 @@ let cert
 try {
   cert = readFileSync(certPath).toString()
   console.log('Certificate loaded successfully')
-  console.log('Certificate length:', cert.length)
-  // Log first few characters to verify content (don't log entire cert for security)
-  console.log('Certificate starts with:', cert.substring(0, 50))
 } catch (error) {
   console.error('Failed to read certificate:', error)
   throw error
 }
+
+// Parse the connection string to get the host
+const connectionString = process.env.DATABASE_URI || ''
+const hostMatch = connectionString.match(/@([^:]+)/)
+const host = hostMatch ? hostMatch[1] : ''
+console.log('Connecting to host:', host)
 
 export default buildConfig({
   admin: {
@@ -89,10 +92,12 @@ export default buildConfig({
       ssl: {
         ca: cert,
         rejectUnauthorized: true,
-        checkServerIdentity: () => undefined,
-        servername: 'pg-1c79c059-proton-31d6.l.aivencloud.com', // Use your actual hostname
+        checkServerIdentity: () => undefined, // Bypass hostname checks
+        // Use the extracted host
+        servername: host,
       },
     },
+    debug: true, // Enable PostgreSQL adapter debugging
   }),
 
   collections: [Pages, Posts, Media, Categories, Users],
