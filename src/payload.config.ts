@@ -122,11 +122,11 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
-      ssl: {
-        rejectUnauthorized: true,
-        // sslrootcert: ca, // Use embedded CA certificate
-        ca: fs.readFileSync('./ca.pem').toString(),
-      },
+      // ssl: {
+      //   rejectUnauthorized: true,
+      //   // sslrootcert: ca, // Use embedded CA certificate
+      //   ca: fs.readFileSync('./ca.pem').toString(),
+      // },
     },
   }),
 
