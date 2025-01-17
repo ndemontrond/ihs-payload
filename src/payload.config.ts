@@ -16,9 +16,11 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { readFileSync } from 'fs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const cert = readFileSync(path.join(process.cwd(), 'ca.pem')).toString()
 
 export default buildConfig({
   admin: {
@@ -60,21 +62,22 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
 
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-    },
-  }),
-
   // db: postgresAdapter({
   //   pool: {
   //     connectionString: process.env.DATABASE_URI || '',
-  //     ssl: {
-  //       rejectUnauthorized: true,
-  //       ca: process.env.PG_SSL_CERT,
-  //     },
   //   },
   // }),
+
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
+      ssl: {
+        ca: cert,
+        rejectUnauthorized: true,
+      },
+    },
+  }),
+
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
