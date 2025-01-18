@@ -120,18 +120,22 @@ export default buildConfig({
   // }),
 
   db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-      max: 10, // Maximum number of connections
-      idleTimeoutMillis: 30000, // How long idle connections remain before being closed
-      connectionTimeoutMillis: 2000, // Timeout for new connections
-      // ssl: {
-      //   rejectUnauthorized: true,
-      //   // sslrootcert: ca, // Use embedded CA certificate
-      //   ca: fs.readFileSync(certPath).toString(),
-      // },
-    },
+    connectionString: process.env.DATABASE_URI || '',
   }),
+
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI || '',
+  //     max: 10, // Maximum number of connections
+  //     idleTimeoutMillis: 30000, // How long idle connections remain before being closed
+  //     connectionTimeoutMillis: 2000, // Timeout for new connections
+  //     // ssl: {
+  //     //   rejectUnauthorized: true,
+  //     //   // sslrootcert: ca, // Use embedded CA certificate
+  //     //   ca: fs.readFileSync(certPath).toString(),
+  //     // },
+  //   },
+  // }),
 
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
